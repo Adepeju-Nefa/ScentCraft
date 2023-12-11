@@ -34,29 +34,18 @@
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
                             <!-- <form id="contactForm" data-sb-form-api-token="API_TOKEN">  -->
-                            <form action="/posts/store"method="POST">
+                            <form action="/posts/store"method="POST" enctype="multipart/form-data">
                                 <div class="form-floating">
                                     <input class="form-control" id="title" name="title" type="text" placeholder="Enter a title..." data-sb-validations="required" />
                                     <label for="title">Blog Title</label>
                                     <div class="invalid-feedback" data-sb-feedback="title:required">A blog title is required.</div>
                                 </div>
-                                <!-- <div class="form-floating">
-                                    <input class="form-control" id="email" type="email" placeholder="Enter your email..." data-sb-validations="required,email" />
-                                    <label for="email">Email address</label>
-                                    <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                    <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-                                </div>
-                                <div class="form-floating">
-                                    <input class="form-control" id="phone" type="tel" placeholder="Enter your phone number..." data-sb-validations="required" />
-                                    <label for="phone">Phone Number</label>
-                                    <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
-                                </div> -->
                                 <div class="form-floating">
                                     <textarea class="form-control" name="body" id="body" placeholder="Enter your message here..." style="height: 12rem" data-sb-validations="required" rows="5"></textarea>
                                     <label for="body">Description</label>
                                     <div class="invalid-feedback" data-sb-feedback="body:required">A message is required.</div>
                                 </div>
-                                <br />
+                                <br/>
 
                                
                                 <!-- Submit success message-->
@@ -65,10 +54,7 @@
                                 <!-- has successfully submitted-->
                                 <div class="d-none" id="submitSuccessMessage">
                                     <div class="text-center mb-3">
-                                        <div class="fw-bolder">Blog Post Created!!!</div>
-                                        To activate this form, sign up at
-                                        <br />
-                                        <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                        <div class="fw-bolder">Blog Post Created!!!</div>                                    
                                     </div>
                                 </div>
                                 <!-- Submit error message-->
@@ -78,8 +64,17 @@
                                 <div class="d-none" id="submitErrorMessage">
                                     <div class="text-center text-danger mb-3">Error Creating Post!</div>
                                 </div>
+
+                                <div class="control-group">
+                                    <div class="form-group floating-label-form-group controls">
+                                        <label>Image</label>
+                                        <input type="file" class="form-control" id="image" name="image">
+                                    </div>
+                                </div>
+                                <br/>
+                                <!-- <div 
                                 <!-- Submit Button-->
-                                <button class="btn btn-primary text-uppercase disabled" id="submitButton" type="submit">Send</button>
+                                <button class="btn btn-primary text-uppercase disabled" id="submitButton" type="submit"> Send </button>
                         <!-- </form>  -->
                         </form>
                         
