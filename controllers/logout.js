@@ -1,6 +1,6 @@
 module.exports = (req,res)=>{
     req.session.destroy(()=>{
-        res.render('/')
+        res.redirect('/')
 
     });
     

@@ -26,8 +26,10 @@ module.exports = (req,res)=>{
             if (user){
                 bcrypt.compare(password,user.password, (error,same)=>{
                     if(same){
-                        req.session.userid = user.id;
+                        req.session.userId = user._id;
                         res.redirect('/');
+                        console.log("user logged in sucessfully - loginUser controller")
+                        // console.log(`session_userID on loginUser.js ${req.session.userId}`);
                     } else{
                         console.log("the user does not exist")
                         res.redirect('/auth/login')

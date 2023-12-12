@@ -7,30 +7,40 @@ const ejs = require('ejs'); //embedded javascript
 //const  BlogPost = require('./models/BlogPost.js');
 const fileUpload = require('express-fileupload')
 const { error } = require('console');
-const expressSession = require('express-session')
-global.loggedIn = null
+const expressSession = require('express-session');
+
 
 const app = express();
 const PORT = 3000;
-
+global.loggedIn = null;
 
 //define mongoose connection
 mongoose.connect('mongodb://localhost/my_database',{useNewUrlParser:true})
 
 //const homePage = fs.readFileSync('index.html');
 app.set('view engine', 'ejs') 
+app.use(expressSession({
+    secret: 'keyboard pet',
+    resave: false,
+    saveUninitialized: true,
+
+}));
+
 //app.use(express.static('pages'))
 app.use(fileUpload())
 app.use(express.static('public'))
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(expressSession({
-    secret: 'keyboard pet'
-}));
+
+
 app.use("*", (req,res,next)=>{
+    // console.log("Setting loggedIn:", req.session.userId);
     loggedIn = req.session.userId;
-    next();
+    next()
 });
+
+
+
 
 // app.get('/',(req,res)=>{
 //     res.render('index');
@@ -50,24 +60,29 @@ const postController = require('./controllers/post')
 const homeController = require('./controllers/home')
 const storePostController = require('./controllers/storePost')
 const getPostController = require('./controllers/getPost')
-const validateMiddleWare = require('./middleware/validationMiddleware')
 const newUserController = require('./controllers/newUser')
 const storeUserController = require('./controllers/storeUser')
 const loginController = require('./controllers/login')
 const loginUserController = require('./controllers/loginUser')
-const authMiddleware = require('./middleware/authMiddleware')
-const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticated')
 const logoutController = require('./controllers/logout')
 
-app.get('/posts/new',authMiddleware, newPostController)
+const validateMiddleWare = require('./middleware/validationMiddleware')
+const authMiddleware = require('./middleware/authMiddleware')
+const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticated')
+
+
 app.get('/', homeController)
 app.get('/post/:id', getPostController)
+
+app.get('/posts/new',authMiddleware, newPostController)
 app.get('/post/store',authMiddleware, storePostController)
 
+
 app.get('/auth/register', redirectIfAuthenticatedMiddleware, newUserController)
+app.post('/users/register',redirectIfAuthenticatedMiddleware, storeUserController)
 app.get('/auth/login',redirectIfAuthenticatedMiddleware, loginController)
 app.post('/users/login', redirectIfAuthenticatedMiddleware, loginUserController)
-app.post('/users/register',redirectIfAuthenticatedMiddleware, storeUserController)
+
 app.get('/auth/logout', logoutController)
 // app.post('post/store',  storePostController)
 
