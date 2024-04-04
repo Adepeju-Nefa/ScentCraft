@@ -41,9 +41,16 @@
                                     <div class="invalid-feedback" data-sb-feedback="title:required">A blog title is required.</div>
                                 </div>
                                 <div class="form-floating">
-                                    <textarea class="form-control" name="body" id="body" placeholder="Enter your message here..." style="height: 12rem" data-sb-validations="required" rows="5"></textarea>
-                                    <label for="body">Description</label>
-                                    <div class="invalid-feedback" data-sb-feedback="body:required">A message is required.</div>
+                                    <!-- <label> Description</label> -->
+                                    <!-- <textarea id="body" name="body" id="body" placeholder="Enter your message here..." style="height: 12rem" data-sb-validations="required" rows="5"></textarea> -->
+                                    <textarea id="body" name="body" class="form-control" rows="5"></textarea>
+                                    <script>
+                                        $('#body').summernote({
+                                            placeholder: 'Description',
+                                            height: 200
+                                        });
+                                    </script>
+                                    <!-- <div class="invalid-feedback" data-sb-feedback="body:required">A message is required.</div> -->
                                 </div>
                                 <br/>
 
@@ -71,18 +78,18 @@
                                         <input type="file" class="form-control" id="image" name="image">
                                     </div>
                                 </div>
-                                <br/>
-                                <!-- <div 
-                                <!-- Submit Button-->
+                                <br>
+                                <div id="success"></div>
+                            
                                 <button class="btn btn-primary text-uppercase disabled" id="submitButton" type="submit"> Send </button>
-                        <!-- </form>  -->
+                        
                         </form>
                         
                         </div>
                    
+                        </div>
                     </div>
-                </div>
-            </div>
+                 </div>
         </main>
         <!-- Footer-->
         <%- include('layouts/footer'); -%>

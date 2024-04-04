@@ -1,5 +1,5 @@
 
-const User = require('../models/User.js')
+const User = require('../models/User')
 const path = require('path')
 
 module.exports = (req, res)=>{
@@ -9,12 +9,14 @@ module.exports = (req, res)=>{
         })
         .catch((error)=>{
             const validationErrors = Object.keys(error.errors).map(key => error.errors[key].message)
-            req.session.validationErrors = validationErrors
+            // req.session.validationErrors = validationErrors
+            req.flash('validationErrors', validationErrors)
+            req.flash('data',req.body)
             // console.log(error)
             return res.redirect('/auth/register')
             
         })
-        
+        // res.redirect('/')
    
     }
    

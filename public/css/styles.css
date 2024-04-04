@@ -357,6 +357,8 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  /* list-style-type: square; */
+  /* font-weight: bold; */
 }
 
 button,

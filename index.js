@@ -8,6 +8,7 @@ const ejs = require('ejs'); //embedded javascript
 const fileUpload = require('express-fileupload')
 const { error } = require('console');
 const expressSession = require('express-session');
+const flash = require('connect-flash');
 
 
 const app = express();
@@ -19,6 +20,7 @@ mongoose.connect('mongodb://localhost/my_database',{useNewUrlParser:true})
 
 //const homePage = fs.readFileSync('index.html');
 app.set('view engine', 'ejs') 
+
 app.use(expressSession({
     secret: 'keyboard pet',
     resave: false,
@@ -27,6 +29,7 @@ app.use(expressSession({
 }));
 
 //app.use(express.static('pages'))
+app.use(flash());
 app.use(fileUpload())
 app.use(express.static('public'))
 app.use(express.json());
@@ -75,7 +78,7 @@ app.get('/', homeController)
 app.get('/post/:id', getPostController)
 
 app.get('/posts/new',authMiddleware, newPostController)
-app.get('/post/store',authMiddleware, storePostController)
+app.post('/posts/store',authMiddleware, storePostController)
 
 
 app.get('/auth/register', redirectIfAuthenticatedMiddleware, newUserController)
@@ -90,7 +93,7 @@ app.get('/posts', postController)
 app.get('/contact', contactController)
 app.get('/about', aboutController)
 
-app.use((req,res)=>res.render('notfound'));
+// app.use((req,res)=>res.render('notfound'));
 
 
 // app.get('/post/:id',async (req,res)=>{
